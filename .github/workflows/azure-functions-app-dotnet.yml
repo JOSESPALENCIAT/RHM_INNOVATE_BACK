@@ -29,7 +29,7 @@ on:
   workflow_dispatch:  # permite ejecución manual desde GitHub UI
 
 env:
-  AZURE_WEBAPP_NAME: rhm-backend-annar-h6b6dmf7bydufqam
+  AZURE_WEBAPP_NAME: RHM-backend-annar
   DOTNET_VERSION: '10.0.x'
   PROJECT_PATH: './src/RHM.API/RHM.API.csproj'
   PUBLISH_DIR: './publish'
