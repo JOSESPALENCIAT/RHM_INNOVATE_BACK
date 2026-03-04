@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet add src/RHM.Application/RHM.Application.csproj reference src/RHM.Infrastructure/RHM.Infrastructure.csproj)",
+      "Bash(dotnet build)",
+      "Bash(dotnet remove src/RHM.API/RHM.API.csproj package Swashbuckle.AspNetCore)",
+      "Bash(dotnet add src/RHM.API/RHM.API.csproj package Swashbuckle.AspNetCore --version 6.*)",
+      "Bash(ng version)",
+      "Bash(ng new rhm-innovate --directory=. --routing=true --style=scss --standalone --skip-git --force)",
+      "Bash(npm install @angular/material @angular/cdk)",
+      "Bash(npm install @angular/material @angular/cdk --legacy-peer-deps)",
+      "Bash(npm install tailwindcss @tailwindcss/postcss postcss --legacy-peer-deps)",
+      "Bash(npm install chart.js ng2-charts --legacy-peer-deps)",
+      "Bash(npm install qrcode @types/qrcode --legacy-peer-deps)"
+    ]
+  }
+}

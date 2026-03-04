@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RHM.API/RHM.API.csproj" />
+    <Project Path="src/RHM.Application/RHM.Application.csproj" />
+    <Project Path="src/RHM.Domain/RHM.Domain.csproj" />
+    <Project Path="src/RHM.Infrastructure/RHM.Infrastructure.csproj" />
+    <Project Path="src/RHM.Shared/RHM.Shared.csproj" />
+  </Folder>
+</Solution>

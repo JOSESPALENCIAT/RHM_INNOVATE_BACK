@@ -1,0 +1,6 @@
+@RHM.API_HostAddress = http://localhost:5198
+
+GET {{RHM.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
