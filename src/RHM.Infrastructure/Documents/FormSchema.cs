@@ -62,5 +62,7 @@ public class FormField
 public class ShowIfCondition
 {
     public string FieldId { get; set; } = string.Empty;
+    /// <summary>equals | not_equals | contains | is_not_empty</summary>
+    public string Operator { get; set; } = "equals";
     public string Value { get; set; } = string.Empty;
 }

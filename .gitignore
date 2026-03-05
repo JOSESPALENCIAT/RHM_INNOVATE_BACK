@@ -34,3 +34,6 @@ Thumbs.db
 
 # dotnet
 *.runtimeconfig.json
+
+# github
+.github/
