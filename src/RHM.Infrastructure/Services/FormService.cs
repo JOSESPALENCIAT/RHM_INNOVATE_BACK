@@ -102,7 +102,30 @@ public class FormService : IFormService
             IsRequired = f.IsRequired,
             Options = f.Options,
             Order = i,
-            Placeholder = f.Placeholder
+            Placeholder = f.Placeholder,
+            // Validation
+            MinValue = f.MinValue,
+            MaxValue = f.MaxValue,
+            MaxLength = f.MaxLength,
+            Pattern = f.Pattern,
+            DisableFutureDates = f.DisableFutureDates,
+            // Conditional display
+            ShowIf = f.ShowIf is null ? null : new ShowIfCondition
+            {
+                FieldId = f.ShowIf.FieldId,
+                Operator = f.ShowIf.Operator,
+                Value = f.ShowIf.Value
+            },
+            // Likert scale
+            ScaleMin = f.ScaleMin,
+            ScaleMax = f.ScaleMax,
+            ScaleMinLabel = f.ScaleMinLabel,
+            ScaleMaxLabel = f.ScaleMaxLabel,
+            // Cascading dropdown
+            ParentFieldId = f.ParentFieldId,
+            CascadeOptions = f.CascadeOptions,
+            // Section separator
+            SectionDescription = f.SectionDescription
         }).ToList();
 
     private static FormSchemaDto MapToDto(FormSchema s) => new()
@@ -119,7 +142,30 @@ public class FormService : IFormService
             IsRequired = f.IsRequired,
             Options = f.Options,
             Order = f.Order,
-            Placeholder = f.Placeholder
+            Placeholder = f.Placeholder,
+            // Validation
+            MinValue = f.MinValue,
+            MaxValue = f.MaxValue,
+            MaxLength = f.MaxLength,
+            Pattern = f.Pattern,
+            DisableFutureDates = f.DisableFutureDates,
+            // Conditional display
+            ShowIf = f.ShowIf is null ? null : new ShowIfConditionDto
+            {
+                FieldId = f.ShowIf.FieldId,
+                Operator = f.ShowIf.Operator,
+                Value = f.ShowIf.Value
+            },
+            // Likert scale
+            ScaleMin = f.ScaleMin,
+            ScaleMax = f.ScaleMax,
+            ScaleMinLabel = f.ScaleMinLabel,
+            ScaleMaxLabel = f.ScaleMaxLabel,
+            // Cascading dropdown
+            ParentFieldId = f.ParentFieldId,
+            CascadeOptions = f.CascadeOptions,
+            // Section separator
+            SectionDescription = f.SectionDescription
         }).ToList(),
         IsPublished = s.IsPublished,
         QrCodeBase64 = s.QrCodeBase64,
