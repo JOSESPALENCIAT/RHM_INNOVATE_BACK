@@ -22,6 +22,9 @@ public static class DbSeeder
         var firstName = config["SuperAdmin:FirstName"] ?? "Super";
         var lastName  = config["SuperAdmin:LastName"]  ?? "Admin";
 
+        // Aplicar migraciones pendientes (crea las tablas si no existen)
+        await context.Database.MigrateAsync();
+
         // No crear si ya existe
         if (await context.Users.AnyAsync(u => u.Role == UserRole.SuperAdmin))
         {

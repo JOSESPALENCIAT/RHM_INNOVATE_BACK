@@ -40,11 +40,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// CORS for Angular dev
+// CORS — orígenes permitidos desde configuración + localhost para dev
+var allowedOrigins = new List<string> { "http://localhost:4200", "https://localhost:4200" };
+var frontendUrl = builder.Configuration["App:FrontendUrl"];
+if (!string.IsNullOrWhiteSpace(frontendUrl))
+    allowedOrigins.Add(frontendUrl.TrimEnd('/'));
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AngularDev", policy =>
-        policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
+    options.AddPolicy("AllowFrontend", policy =>
+        policy.WithOrigins(allowedOrigins.ToArray())
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
@@ -82,14 +87,12 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RHM Innovate API v1"));
-}
+// Swagger disponible en todos los entornos
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RHM Innovate API v1"));
 
 app.UseHttpsRedirection();
-app.UseCors("AngularDev");
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
