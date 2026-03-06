@@ -24,4 +24,7 @@ public class MongoDbContext
 
     public IMongoCollection<FormResponse> FormResponses =>
         _database.GetCollection<FormResponse>("form_responses");
+
+    public IMongoCollection<GlobalRiasConfig> GlobalRiasConfig =>
+        _database.GetCollection<GlobalRiasConfig>("global_rias_config");
 }

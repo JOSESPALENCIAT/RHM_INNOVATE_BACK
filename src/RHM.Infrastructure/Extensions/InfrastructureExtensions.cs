@@ -42,6 +42,7 @@ public static class InfrastructureExtensions
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IFormService, FormService>();
         services.AddScoped<IFormResponseService, FormResponseService>();
+        services.AddScoped<IRiasCardService, RiasCardService>();
 
         return services;
     }
