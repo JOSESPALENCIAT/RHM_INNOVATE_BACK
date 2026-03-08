@@ -27,4 +27,25 @@ public class MongoDbContext
 
     public IMongoCollection<GlobalRiasConfig> GlobalRiasConfig =>
         _database.GetCollection<GlobalRiasConfig>("global_rias_config");
+
+    /// <summary>
+    /// Perfiles de riesgo calculados por el Motor de Estratificación.
+    /// Vinculados al MPI mediante PatientId (UUID de Azure SQL).
+    /// </summary>
+    public IMongoCollection<PatientRiskProfile> PatientRiskProfiles =>
+        _database.GetCollection<PatientRiskProfile>("patient_risk_profiles");
+
+    /// <summary>
+    /// Configuración de mapeo: campo de formulario → variable clínica sys_*.
+    /// Una entrada por formulario (upsert).
+    /// </summary>
+    public IMongoCollection<FieldMappingConfig> FieldMappings =>
+        _database.GetCollection<FieldMappingConfig>("field_mappings");
+
+    /// <summary>
+    /// Configuración parametrizable del Motor de Estratificación por tenant.
+    /// Una entrada por tenant (upsert).
+    /// </summary>
+    public IMongoCollection<TenantRiskConfig> TenantRiskConfigs =>
+        _database.GetCollection<TenantRiskConfig>("tenant_risk_configs");
 }

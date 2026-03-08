@@ -28,8 +28,9 @@ public static class InfrastructureExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ITenantRepository, TenantRepository>();
 
-        // HttpClient factory (used by WebhookService)
+        // HttpClient factory (used by WebhookService and NarrativeService)
         services.AddHttpClient("n8n");
+        services.AddHttpClient("claude");
 
         // Infrastructure Services
         services.AddScoped<JwtService>();
@@ -43,6 +44,11 @@ public static class InfrastructureExtensions
         services.AddScoped<IFormService, FormService>();
         services.AddScoped<IFormResponseService, FormResponseService>();
         services.AddScoped<IRiasCardService, RiasCardService>();
+        services.AddScoped<IMasterPatientIndexService, MasterPatientIndexService>();
+        services.AddScoped<IRiskEngineService, RiskEngineService>();
+        services.AddScoped<IFieldMappingService, FieldMappingService>();
+        services.AddScoped<ITenantRiskConfigService, TenantRiskConfigService>();
+        services.AddScoped<INarrativeService, NarrativeService>();
 
         return services;
     }

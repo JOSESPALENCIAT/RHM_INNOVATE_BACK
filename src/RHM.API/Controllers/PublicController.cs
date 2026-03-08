@@ -11,15 +11,18 @@ public class PublicController : ControllerBase
     private readonly IFormService _formService;
     private readonly IFormResponseService _responseService;
     private readonly IWebhookService _webhook;
+    private readonly IRiskEngineService _riskEngine;
 
     public PublicController(
         IFormService formService,
         IFormResponseService responseService,
-        IWebhookService webhook)
+        IWebhookService webhook,
+        IRiskEngineService riskEngine)
     {
         _formService = formService;
         _responseService = responseService;
         _webhook = webhook;
+        _riskEngine = riskEngine;
     }
 
     [HttpGet("forms/{publicUrl}")]
@@ -50,6 +53,10 @@ public class PublicController : ControllerBase
             longitude = response.Longitude,
             submittedAt = response.SubmittedAt
         }));
+
+        // Fire-and-forget: calculate risk profile if patient was identified via MPI
+        if (response.PatientId is not null)
+            _ = Task.Run(() => _riskEngine.CalculateAsync(form.TenantId, response.Id!, CancellationToken.None));
 
         return Ok(response);
     }
