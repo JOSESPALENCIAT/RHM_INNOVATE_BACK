@@ -29,13 +29,16 @@ public class NarrativeService : INarrativeService
     {
         _mongo  = mongo;
         _http   = factory.CreateClient("claude");
-        _apiKey = config["Claude:ApiKey"]
-            ?? throw new InvalidOperationException("Claude:ApiKey no configurado.");
+        _apiKey = config["Claude:ApiKey"] ?? string.Empty;
     }
 
     public async Task<NarrativeResponseDto> GenerateAsync(
         string tenantId, string patientId, CancellationToken ct = default)
     {
+        if (string.IsNullOrWhiteSpace(_apiKey))
+            throw new InvalidOperationException(
+                "La generación de narrativas clínicas requiere configurar 'Claude:ApiKey' en el App Service.");
+
         // 1. Obtener el perfil de riesgo más reciente del paciente
         var profile = await _mongo.PatientRiskProfiles
             .Find(r => r.TenantId == tenantId && r.PatientId == patientId)

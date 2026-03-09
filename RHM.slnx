@@ -6,4 +6,7 @@
     <Project Path="src/RHM.Infrastructure/RHM.Infrastructure.csproj" />
     <Project Path="src/RHM.Shared/RHM.Shared.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RHM.Tests/RHM.Tests.csproj" />
+  </Folder>
 </Solution>
